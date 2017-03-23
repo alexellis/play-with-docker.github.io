@@ -6,7 +6,7 @@ permalink: /about/
 
 ## About Docker Labs
 
-This material is pulled from [https://github.com/docker/labs]() and contains Docker labs and tutorials authored both by Docker, and by members of the community. We welcome contributions and want that repo to grow. If you have a tutorial to submit, or contributions to existing tutorials, please see this guide: [Guide to submitting your own tutorial](https://github.com/docker/labs/blob/master/contribute.md)
+This material is pulled from [https://github.com/docker/labs](https://github.com/docker/labs) and contains Docker labs and tutorials authored both by Docker, and by members of the community. We welcome contributions and want that repo to grow. If you have a tutorial to submit, or contributions to existing tutorials, please see this guide: [Guide to submitting your own tutorial](https://github.com/docker/labs/blob/master/contribute.md)
 
 ## About play-with-docker
 
