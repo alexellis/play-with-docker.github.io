@@ -139,7 +139,7 @@ Create the app.go file:
 ```.term1
 echo 'package main
 
-import "os"
+import "fmt"
 
 func main() {
     fmt.Println("Hello world!")
