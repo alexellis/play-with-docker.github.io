@@ -63,7 +63,7 @@ s ago      692MB
 The `docker history` command will show you that the layers we added during the build are only a small part of the resulting image (about 20MB +/-):
 
 ```.term1
-docker history href-counter:sdk |head -n 4
+docker history alexellis2/href-counter:sdk |head -n 4
 ```
 ```
 IMAGE               CREATED             CREATED BY
@@ -137,28 +137,28 @@ cd hello
 Create the app.go file:
 
 ```.term1
-echo "package main
+echo 'package main
 
-import "os"
+import "fmt"
 
 func main() {
     fmt.Println("Hello world!")
 }
-" | tee app.go
+' | tee app.go
 ```
 
 Create a Dockerfile with the following contents:
 
 ```.term1
-echo "
+echo '
 FROM golang:1.7.3
 COPY app.go .
-RUN go build app.go -o app
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
 FROM scratch
-COPY --from 0 app
-CMD ["./app"]
-" | tee Dockerfile
+COPY --from=0 /go/app /app
+CMD ["/app"]
+' | tee Dockerfile
 ```
 
 Now build and run the Dockerfile:
@@ -173,7 +173,17 @@ The resulting size of hello-world is very small:
 ```.term1
 docker images |grep hello-world-lab
 ```
+```
+hello-world-lab           latest              dd181a7bd70f        22
+seconds ago       1.63MB
+```
 
 ## More about the lab
 
-This lab was built from a blog post by [Alex Ellis]https://twitter.com/alexellisuk) - [Builder pattern vs. Multi-stage builds in Docker](http://blog.alexellis.io/mutli-stage-docker-builds/).
+This lab was built from a blog post by [Alex Ellis](https://twitter.com/alexellisuk)
+
+* Blog: [Builder pattern vs. Multi-stage builds in Docker](http://blog.alexellis.io/mutli-stage-docker-builds/).
+
+> Note: We do not recommend moving over to multi-stage builds until they are fully available on the Docker Hub/Cloud and all editions of Docker. The example in `build.sh` provides an interim solution for using separate Dockerfiles to build and ship code.
+
+
