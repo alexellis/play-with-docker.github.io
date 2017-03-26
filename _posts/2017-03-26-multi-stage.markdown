@@ -137,28 +137,28 @@ cd hello
 Create the app.go file:
 
 ```.term1
-echo "package main
+echo 'package main
 
 import "os"
 
 func main() {
     fmt.Println("Hello world!")
 }
-" | tee app.go
+' | tee app.go
 ```
 
 Create a Dockerfile with the following contents:
 
 ```.term1
-echo "
+echo '
 FROM golang:1.7.3
 COPY app.go .
-RUN go build app.go -o app
+RUN go build -o app app.go
 
 FROM scratch
-COPY --from 0 app
+COPY --from=0 /go/app .
 CMD ["./app"]
-" | tee Dockerfile
+' | tee Dockerfile
 ```
 
 Now build and run the Dockerfile:
